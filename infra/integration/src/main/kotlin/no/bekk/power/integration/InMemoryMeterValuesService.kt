@@ -2,11 +2,11 @@ package no.bekk.power.integration
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import no.bekk.power.usecase.consumption.service.MeterValues
-import no.bekk.power.usecase.consumption.service.MeterValuesService
 import no.bekk.power.domain.valuetypes.MeteringPointId
 import no.bekk.power.domain.valuetypes.Period
-import java.time.ZonedDateTime
+import no.bekk.power.usecase.consumption.service.MeterValues
+import no.bekk.power.usecase.consumption.service.MeterValuesService
+import java.time.OffsetDateTime
 
 class InMemoryMeterValuesService(objectMapper: ObjectMapper) : MeterValuesService {
 
@@ -46,14 +46,14 @@ data class MeterValuesDTO(val meteringpoints: List<MeteringsPoints>) {
     )
 
     data class MeterValue(
-        val fromHour: ZonedDateTime,
-        val toHour: ZonedDateTime,
+        val fromHour: OffsetDateTime,
+        val toHour: OffsetDateTime,
         val timeSeries: List<TimeSerie>
     )
 
     data class TimeSerie(
-        val startTime: ZonedDateTime,
-        val endTime: ZonedDateTime,
+        val startTime: OffsetDateTime,
+        val endTime: OffsetDateTime,
         val value: Double,
         val uom: String
     )

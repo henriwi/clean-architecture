@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import java.time.ZonedDateTime
+import java.time.OffsetDateTime
 
 @RestController
 class ConsumptionController(private val consumptionForPeriodUseCase: GetConsumptionForPeriodUseCase) {
@@ -16,8 +16,8 @@ class ConsumptionController(private val consumptionForPeriodUseCase: GetConsumpt
     fun getTotalConsumptionForPeriod(
         @PathVariable("customerId") customerId: String,
         @PathVariable("meteringPointId") meteringPointId: String,
-        @RequestParam("from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) from: ZonedDateTime,
-        @RequestParam("to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) to: ZonedDateTime): ResponseEntity<Any> {
+        @RequestParam("from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) from: OffsetDateTime,
+        @RequestParam("to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) to: OffsetDateTime): ResponseEntity<Any> {
         val totalConsumption = consumptionForPeriodUseCase.getTotalConsumption(customerId, meteringPointId, from, to)
         return ResponseEntity.ok(totalConsumption)
     }
